@@ -9,13 +9,31 @@ function calcularMediaAritmetica(lista) {
 }
 
 const lista1 = [
-    100,
+    700,
     200,
-    500,
-    400000000
+    400000000,
+    1000,
+    600,
+    12,
+    5
 ];
 
-const mitadLista1 = parseInt(lista1.length / 2);
+console.group("Lista Desordenada");
+console.log(lista1);
+console.groupEnd();
+
+const listaOrdenada = lista1.sort(function compareFunction(a, b) {
+    // 1. < 0 ... 'a' comes first
+    // 2. = 0 ... nothing will be changed
+    // 3. > 0 ... b comes first
+    return a - b;
+});
+
+console.group("Lista Ordenada");
+console.log(listaOrdenada);
+console.groupEnd();
+
+const mitadListaOrdenada = parseInt(listaOrdenada.length / 2);
 
 let mediana;
 
@@ -27,9 +45,9 @@ function esPar(numerito) {
     }
 }
 
-if (esPar(lista1.length)) {
-    const elemento1 = lista1[mitadLista1 - 1];
-    const elemento2 = lista1[mitadLista1];
+if (esPar(listaOrdenada.length)) {
+    const elemento1 = listaOrdenada[mitadListaOrdenada - 1];
+    const elemento2 = listaOrdenada[mitadListaOrdenada];
 
     const promedioElemento1y2 = calcularMediaAritmetica([
         elemento1,
@@ -37,8 +55,14 @@ if (esPar(lista1.length)) {
     ]);
 
     mediana = promedioElemento1y2;
-} else {
-    mediana = lista1[mitadLista1];
-}
 
-console.log(mediana);
+    console.group("Mediana de Array Par");
+    console.log(mediana);
+    console.groupEnd();
+} else {
+    mediana = listaOrdenada[mitadListaOrdenada];
+
+    console.group("Mediana de Array Impar");
+    console.log(mediana);
+    console.groupEnd();
+}
