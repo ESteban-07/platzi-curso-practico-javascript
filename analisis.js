@@ -1,3 +1,9 @@
+// Helpers
+
+function esPar(number) {
+    return number % 2 === 0;
+}
+
 function calcularPromedio(lista) {
     const sumaLista = lista.reduce((acc, curr) => {
         return acc + curr;
@@ -7,17 +13,7 @@ function calcularPromedio(lista) {
     return promedioLista;
 }
 
-const salariosCol = colombia.map((person) => {
-    return person.salary;
-});
-
-const salariosColSorted = salariosCol.sort((salarioA, salarioB) => {
-    return salarioA - salarioB;
-});
-
-function esPar(number) {
-    return number % 2 === 0;
-}
+// Calculadora de mediana
 
 function medianaSalarios(lista) {
     const mitadLista = parseInt(lista.length / 2);
@@ -38,4 +34,32 @@ function medianaSalarios(lista) {
     return mediana;
 }
 
-console.log(medianaSalarios(salariosColSorted));
+// Mediana General
+
+const salariosCol = colombia.map((person) => {
+    return person.salary;
+});
+
+const salariosColSorted = salariosCol.sort((salarioA, salarioB) => {
+    return salarioA - salarioB;
+});
+
+const medianaGeneral = medianaSalarios(salariosColSorted);
+
+// Mediana del top 10%
+// Utilizaremos el método slice en vez del splice
+// para no mutar el array original y así poder hacer
+// una copia superfical del array original con el top 10%
+
+const sliceStart = parseInt((salariosColSorted.length * 90) / 100);
+
+const sliceEnd = salariosColSorted.length;
+
+const salariosColTop10 = salariosColSorted.slice(sliceStart, sliceEnd);
+
+const medianaTop10Col = medianaSalarios(salariosColTop10);
+
+console.log({
+    medianaGeneral,
+    medianaTop10Col,
+});
